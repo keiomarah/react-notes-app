@@ -69,11 +69,15 @@ function NoteInterface({add, deleteNote, notes, noteID, setNotes}) {
 }
 
 function App() {
-  const [notes, setNotes] = useState([
+  const [notes, setNotes] = useState(() => {
+    if (localStorage.getItem("notes")) {
+      return JSON.parse(localStorage.getItem("notes"));
+    }
+    return [
   new Note("Shower thoughts: if pigs could fly"),
   new Note("Movies I need to watch: Sinners, Interstellar, The Boy and the heron"),
   new Note("Grocery list: eggs, milk, parsley, cheese")
-]);
+]});
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));

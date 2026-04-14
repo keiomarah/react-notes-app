@@ -89,7 +89,7 @@ ul li:active {
 }
 .note {
     width: 65vw;
-    height: 50vh;
+    height: 75vh;
     padding: 32px;
     display: flex;
     flex-direction: column;
@@ -97,6 +97,7 @@ ul li:active {
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 textarea {
