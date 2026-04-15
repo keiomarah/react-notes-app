@@ -18,17 +18,23 @@ function Button({ className, onClick, iconName }) {
   )
 }
 
-function ListPreview({notes, onSelect}) {
-
+function ListPreview({ notes, onSelect, selectedNote }) {
+  
   return (
     <ul className="list-preview">
-      {notes.map(note => <li key={note.id} onClick={() => onSelect(note.id)}>{note.content.slice(0, 15)}...</li>
+      {notes.map(note => 
+      <li key={note.id} onClick={() => {
+        onSelect(note.id)
+      }} 
+      className={note.id === selectedNote ? "highlight" : ""}>
+        {note.content.slice(0, 15)}...
+        </li>
       )}
     </ul>
   )
 }
 
-function Sidebar({notes, onSelect}) {
+function Sidebar({ notes, onSelect, selectedNote }) {
 
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
@@ -40,7 +46,7 @@ function Sidebar({notes, onSelect}) {
     <div className="sidebar-container">
       <Button className="hide-btn btn-style" onClick={toggleSidebar} iconName={faAnglesLeft}/>
       <div className={`sidebar background-border-design ${isSidebarVisible ? "show" : "hide"}`}>
-        <ListPreview notes={notes} onSelect={onSelect}/>
+        <ListPreview notes={notes} onSelect={onSelect} selectedNote={selectedNote}/>
       </div>
     </div>
   )
@@ -120,7 +126,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Sidebar notes={notes} onSelect={handleSelect}/>
+      <Sidebar notes={notes} onSelect={handleSelect} selectedNote={selectedNote}/>
       <NoteInterface add={addNote} notes={notes} noteID={selectedNote} deleteNote={deleteNote} setNotes={setNotes}/>
     </div>
   )
